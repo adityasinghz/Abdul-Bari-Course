@@ -52,13 +52,14 @@ void InsertCyclic(Node **p, int key, int pos)
   Node *q = *p;
   if (pos == 0)
   {
+    Node *l = *p;
+    while (l->next && l->next != *p)
+    {
+      l = l->next;
+    }
     newNode->next = *p;
     *p = newNode;
-    Node *last = *p;
-    while (last->next)
-      last = last->next;
-
-    last->next = *p;
+    l->next = *p;
     return;
   }
   for (int i = 0; i < pos - 1; i++)
@@ -84,5 +85,7 @@ int main()
   last->next = first;
 
   InsertCyclic(&first, 89, 3);
+  InsertCyclic(&first, 78, 0);
+  InsertCyclic(&first, 81, 0);
   Display(first);
 }

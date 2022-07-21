@@ -11,17 +11,20 @@ struct Node
 void Insert(Node **p, int key)
 {
     Node *newNode = new Node;
-    newNode->next = nullptr;
     newNode->data = key;
+    newNode->next = nullptr;
     if (*p == nullptr)
     {
         *p = newNode;
         return;
     }
-    Node *q = *p;
-    while (q->next)
-        q = q->next;
-    q->next = newNode;
+    else
+    {
+        Node *q = *p;
+        while (q->next)
+            q = q->next;
+        q->next = newNode;
+    }
 }
 
 void Display(Node *p)
@@ -43,5 +46,12 @@ int main()
     {
         Insert(&first, arr[i]);
     }
+    Node *last = first;
+    while (last->next)
+    {
+        last = last->next;
+    }
+    last->next = first;
+
     Display(first);
 }
